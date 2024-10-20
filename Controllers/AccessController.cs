@@ -10,7 +10,7 @@ namespace ThucHanhWebMVC.Controllers
 		[HttpGet]
 		public IActionResult Login()
 		{
-			if (HttpContext.Session.GetString("Username") != null)
+			if (HttpContext.Session.GetString("Username") == null)
 			{
 				return View();
 			}
@@ -35,5 +35,12 @@ namespace ThucHanhWebMVC.Controllers
 
 			return View();
 		}
+
+		public IActionResult Logout()
+        {
+			HttpContext.Session.Clear();
+            HttpContext.Session.Remove("Username");
+            return RedirectToAction("Login", "Access");
+        }
 	}
 }
